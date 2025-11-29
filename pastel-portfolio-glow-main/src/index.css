@@ -1,3 +1,4 @@
+/* stylelint-disable */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +9,10 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 300 20% 98%;
+    /* softened background for light mode — gentle pastel pink so it doesn't feel 'harsh' */
+    /* darker, less bright pastel pink — reduced lightness to make the page easier on the eyes */
+    /* Even darker pastel-pink background for lower glare */
+    --background: 340 25% 88%; /* hue 340, 25% saturation, 88% lightness — visibly less bright */
     --foreground: 270 15% 15%;
 
     --card: 0 0% 100%;
@@ -207,5 +211,34 @@ All colors MUST be HSL.
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@layer utilities {
+  /* Infinite horizontal scroll (used by Gallery component)
+     - uses a CSS variable for duration so pages/components can override easily
+     - ensures children don't shrink and allows gaps to work correctly */
+  @keyframes scroll-x {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .infinite-scroll {
+    /* make the default speed a little faster */
+    --gallery-scroll-duration: 18s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: max-content; /* content decides width, duplication in component creates >200% width */
+    will-change: transform;
+    animation: scroll-x var(--gallery-scroll-duration) linear infinite;
+  }
+
+  .infinite-scroll > * {
+    flex-shrink: 0; /* prevent items from shrinking while translating */
+  }
+
+  .infinite-scroll:hover {
+    animation-play-state: paused; /* pause scrolling on hover */
   }
 }

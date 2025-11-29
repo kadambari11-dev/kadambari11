@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Download, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import profileImg from "@/assets/profile.jpg";
 
 const Hero = () => {
@@ -10,13 +10,6 @@ const Hero = () => {
     }
   };
 
-  const handleDownloadCV = () => {
-    // Create a placeholder CV download
-    const link = document.createElement("a");
-    link.href = "#";
-    link.download = "CV.pdf";
-    link.click();
-  };
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative">
@@ -41,14 +34,7 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button
-              size="lg"
-              onClick={handleDownloadCV}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2 shadow-soft"
-            >
-              <Download size={20} />
-              Download CV
-            </Button>
+            {/* Download CV removed per request */}
             <Button
               size="lg"
               variant="outline"
